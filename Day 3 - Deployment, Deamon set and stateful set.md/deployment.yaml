@@ -4,15 +4,15 @@ metadata:
   labels:
     app: testpod1
   name: testpod1
-  annotations:
-    info: "amitsinghdhanik"
-    email: "amitsinghdhanik@gmail.com"
 spec:
+  strategy:
+    rollingUpdate: 
+      maxSurge: 100%
+      maxUnavailable: 
   replicas: 6
   selector:
     matchLabels:
       app: testpod1
-  strategy: {}
   template:
     metadata:
       creationTimestamp: null
@@ -24,10 +24,3 @@ spec:
         name: kubegame
       - image: kiran2361993/mydb:v1
         name: mysqldb
-        env: 
-          - name: DB_NAME
-            value: "mysqldb"
-          - name: DB_PORT
-            value: "3306"
-          - name: DB_URL
-            value: "www"
