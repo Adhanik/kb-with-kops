@@ -21,3 +21,26 @@ Events:                   <none>
 
 
 # Endpoint is imp on which your pod is exposed
+
+
+---
+# When pod is delete, endpiont is updated, and shows null
+# kubectl describe svc -n alpha
+Name:                     alpha1
+Namespace:                alpha
+Labels:                   run=alpha1
+Annotations:              <none>
+Selector:                 run=alpha1
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       100.67.152.172
+IPs:                      100.67.152.172
+Port:                     <unset>  8000/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  31547/TCP
+Endpoints:                
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Internal Traffic Policy:  Cluster
+Events:                   <none>
