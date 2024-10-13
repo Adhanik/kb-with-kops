@@ -28,8 +28,8 @@ In Kubernetes, a **Service (svc)** is responsible for providing a stable network
 
 1. **Creating a Service (`kubectl expose`)**:
    When you run:
-   ```bash
-   kubectl expose pod alpha1 --port=8000 --target-port=80 --type=NodePort
+   ```bash 
+   kubectl expose pod alpha1 --port=8000 --target-port=80 --type=NodePort -n <ns>
    ```
    Kubernetes creates a **Service** that exposes the `alpha1` Pod at `NodePort`. Behind the scenes, the Service will look for Pods that match a **label selector** (if you haven’t explicitly provided a label selector, it defaults to the Pod's labels).
 

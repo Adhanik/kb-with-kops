@@ -1,5 +1,5 @@
 
-### Kubens
+### Kubens (Optional)
 
 We will be installing kubens in our management-server node. Kubens is a tool that helps to switch between Kubernetes namespaces (and configure them for kubectl) easily.
 
