@@ -48,8 +48,8 @@ Go to account - generate new token - give read, write and delete permission. Cop
 
 
 kubectl create secret docker-registry docker-pwd \
---docker-server=docker.io --docker-username=adminnik \
---docker-password=dckr_pat_lm4tgs1Ayabnn3gKm7OXxZHkf38 \
+--docker-server=docker.io --docker-username=NAME \
+--docker-password=token \
 --docker-email=workwithnik@gmail.com
 
 so now we have two secrets, one for tls, and one for docker hub with name demo. We need to pass this in our voting.yaml
