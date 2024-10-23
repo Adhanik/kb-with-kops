@@ -1,0 +1,64 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: result-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    
+#  changed - as it is depracted "kubernetes.io/ingress.class"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - "result.cloudadhanik.xyz"
+    secretName: nginx-tls-default
+  rules:
+  - host: result.cloudadhanik.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: result
+            port:
+              number: 80
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vote-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - "vote.cloudadhanik.xyz"
+    - "www.cloudadhanik.xyz"
+    secretName: nginx-tls-default
+  rules:
+  - host: vote.cloudadhanik.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: vote
+            port:
+              number: 80
+  - host: www.cloudadhanik.xyz
+    http: 
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: vote
+            port:
+              number: 80
+
