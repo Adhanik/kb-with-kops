@@ -16,7 +16,7 @@ adb65a2089d91489a96ce54036c829c4-a3b57334a1d0d57d.elb.us-east-1.amazonaws.com
 - for result similarly we will create another simple record with result as subdomain. we will click on create records at last, and wait for them to get in sync.
 
 
-So we hvae foll records - 
+So we have foll records - 
     vote.cloudadhanik.xyz
     www.cloudadhanik.xyz
     result.cloudadhanik.xyz
@@ -29,17 +29,17 @@ Once the Ingress resources are recognized, the NGINX Ingress controller should c
 
 The external load balancer IP or hostname should now be visible under the EXTERNAL-IP field.
 
-This is issue which we will solve by including a field in our ingress.yaml  `spec:
-  ingressClassName: nginx`
+This is issue which we will solve by including a field in our ingress.yaml  
+`spec:ingressClassName: nginx`
 
-
+```
 kubectl get ingress
 NAME             CLASS    HOSTS                                        ADDRESS   PORTS     AGE
 result-ingress   <none>   result.cloudadhanik.xyz                                80, 443   6s
 vote-ingress     <none>   vote.cloudadhanik.xyz,www.cloudadhanik.xyz             80, 443   6s
 ```
 
-
+If we do describe on our ingress svc, we can see load balancer address there.
 
 ```
 kubectl describe svc ingress-nginx-controller -n ingress-nginx

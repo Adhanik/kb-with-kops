@@ -7,7 +7,6 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 
 Check if ingress pod is up and running
 ```
-
 kubectl get pods -n ingress-nginx
 NAME                                        READY   STATUS      RESTARTS   AGE
 ingress-nginx-admission-create-85pww        0/1     Completed   0          26m
@@ -21,11 +20,15 @@ The output shows that the NGINX Ingress Controller pod (ingress-nginx-controller
 
 2.  Next, run the following command to check if the Ingress Controller service has been assigned an external LoadBalancer:
 
+```
+
 kubectl get svc -n ingress-nginx
 NAME                                 TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
 ingress-nginx-controller             LoadBalancer   100.67.88.198   <pending>     80:32713/TCP,443:31322/TCP   28m
 ingress-nginx-controller-admission   ClusterIP      100.70.29.4     <none>        443/TCP                      28m
 ubuntu@ip-172-31-80-64:~$ 
+
+```
 
 Here, we see that the EXTERNAL-IP shows <pending>, this means the AWS Load Balancer is not yet created.
 

@@ -40,7 +40,7 @@ worker-7b6cf87597-5pfrp   0/1     ErrImagePull   0          34s
  Error: ErrImagePull
   Warning  FailedToRetrieveImagePullSecret  7s (x6 over 64s)   kubelet            Unable to retrieve some image pull secrets (docker-pwd); attempting to pull the image may not succeed.
 
-only DB image is working fine. This happens because ours is a private repo, and deployment dont have secrets. so we need to pass 'docker-secrets' in our deployment.yaml as well.
+only DB image is working fine. This happens because ours is a private repo, and deployment dont have secrets to access the our private docker hub repo. so we need to pass 'docker-secrets' in our deployment.yaml as well.
 
 Go to account - generate new token - give read, write and delete permission. Copy and paste the token below in docker-password= <token>
 

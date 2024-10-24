@@ -30,8 +30,10 @@ It will show confirmation
 
 ```
 Successfully received certificate.
-Certificate is saved at: /etc/letsencrypt/live/cloudadhanik.xyz/fullchain.pem
-Key is saved at:         /etc/letsencrypt/live/cloudadhanik.xyz/privkey.pem
+
+`Certificate is saved at: /etc/letsencrypt/live/cloudadhanik.xyz/fullchain.pem`
+`Key is saved at:         /etc/letsencrypt/live/cloudadhanik.xyz/privkey.pem`
+
 This certificate expires on 2025-01-16.
 These files will be updated when the certificate renews.
 

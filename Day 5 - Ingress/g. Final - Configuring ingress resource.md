@@ -1,7 +1,7 @@
 
 
 # Creating ingress resource
-So we hvae foll records - 
+So we have foll records - 
     vote.cloudadhanik.xyz
     www.cloudadhanik.xyz
     result.cloudadhanik.xyz
@@ -83,12 +83,16 @@ ubuntu@ip-172-31-80-64:~$ vi ingress.yaml
 ubuntu@ip-172-31-80-64:~$ kubectl apply -f ingress.yaml 
 ```
 
- kubectl get ingress
+```
+
+
+kubectl get ingress
 NAME             CLASS   HOSTS                                        ADDRESS                                                                         PORTS     AGE
 result-ingress   nginx   result.cloudadhanik.xyz                      adb65a2089d91489a96ce54036c829c4-a3b57334a1d0d57d.elb.us-east-1.amazonaws.com   80, 443   7m52s
 vote-ingress     nginx   vote.cloudadhanik.xyz,www.cloudadhanik.xyz   adb65a2089d91489a96ce54036c829c4-a3b57334a1d0d57d.elb.us-east-1.amazonaws.com   80, 443   7m52s
 ubuntu@ip-172-31-80-64:~$ 
 
+```
 
 Once the load balancer is up, you can access your application using your domain names (www.cloudadhanik.xyz, vote.cloudadhanik.xyz, result.cloudadhanik.xyz).
 
@@ -98,11 +102,11 @@ When you use kubectl edit ingress vote-ingress, the changes should apply directl
 
 Since you are asking about how to edit only the vote-ingress section within the original ingress.yaml file without recreating the resources, you can do it - `kubectl edit ingress vote-ingress`
 
-
+```
 kubectl get ingress
 NAME             CLASS   HOSTS                                        ADDRESS                                                                         PORTS     AGE
 result-ingress   nginx   result.cloudadhanik.xyz                      adb65a2089d91489a96ce54036c829c4-a3b57334a1d0d57d.elb.us-east-1.amazonaws.com   80, 443   7m52s
 vote-ingress     nginx   vote.cloudadhanik.xyz,www.cloudadhanik.xyz   adb65a2089d91489a96ce54036c829c4-a3b57334a1d0d57d.elb.us-east-1.amazonaws.com   80, 443   7m52s
-
+```
 
 Now we can access the website on our domain www.cloudadhanik.xyz
