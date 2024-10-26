@@ -67,5 +67,43 @@ So for readiness probe, we see it does not serve traffic to that pod and marks i
 
 Warning  Unhealthy  28s (x22 over 3m28s)  kubelet            Readiness probe failed: HTTP probe failed with statuscode: 404
 
+# Implementing Liveness probe
+
+Now we will add liveness probe as well in our deployment.yaml . We can see that the container which was down comes up
+
+```
+watch kubectl get pods
+
+Every 2.0s: kubectl get pods                                                          ip-172-31-19-48: Sat Oct 26 12:25:36 2024
+
+NAME                    READY   STATUS    RESTARTS   AGE
+app1-6b5b777b88-ds29b   1/1     Running   0          90s
+app1-6b5b777b88-qglls   1/1     Running   0          111s
+app1-6b5b777b88-rlnfl   1/1     Running   0          100
+```
+
+We will see that livenes probes restart container after 15 secs
+
+```
+watch kubectl get pods
+
+Every 2.0s: kubectl get pods                                                          ip-172-31-19-48: Sat Oct 26 12:32:19 2024
+
+NAME                    READY   STATUS    RESTARTS      AGE
+app1-6b5b777b88-ds29b   1/1     Running   0             8m13s
+app1-6b5b777b88-qglls   1/1     Running   0             8m34s
+app1-6b5b777b88-rlnfl   1/1     Running   1 (23s ago)   8m23s
 
 
+```
+
+The EVENT Section will show us this 
+
+```
+ Warning  Unhealthy  60s (x8 over 110s)   kubelet            Readiness probe failed: HTTP probe failed with statuscode: 404
+  Warning  Unhealthy  60s (x3 over 100s)   kubelet            Liveness probe failed: HTTP probe failed with statuscode: 404
+  Normal   Killing    60s                  kubelet            Container kubegame failed liveness probe, will be restarted
+
+```
+
+So liveness probes restarts the container
