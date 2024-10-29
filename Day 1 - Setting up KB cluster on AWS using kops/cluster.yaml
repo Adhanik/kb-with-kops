@@ -131,4 +131,5 @@ metadata:
     kops.k8s.io/cluster: cloudadhanik.xyz
   name: admin
 spec:
-  publicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG+NbaDaqeU3ZyDJjbncn7dPWaZYpOa6nZh/DlqR+oip
+  publicKey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILyXgniJLy9x6pS50JnXBGb/ALzCVtJTOtvo8Mv1dL18
+    ubuntu@ip-172-31-26-73
