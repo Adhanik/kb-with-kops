@@ -1,0 +1,63 @@
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    env: prod
+  name: adapter-container-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      env: prod
+  template:
+    metadata:
+      labels:
+        env: prod
+    spec:
+      initContainers:
+      - name: init-container
+        image: alpine/git
+        command: ["/bin/sh"]
+        args: ["-c", "git clone https://github.com/saikiranpi/Sidecar_Test.git /html"]
+        volumeMounts:
+        - name: nginxvol
+          mountPath: /html/
+      containers:
+      - name: adapter-container
+        image: busybox:1.28
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do echo \\<h1\\>$(date)\\</h1\\> >> /html/index.html; sleep 5;done"]
+        volumeMounts:
+        - name: nginxvol
+          mountPath: /html/
+      - name: main-container
+        image: nginx:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 80
+        volumeMounts:
+        - name: nginxvol 
+          mountPath: /usr/share/nginx/html/
+      volumes:
+      - name: nginxvol
+        emptyDir: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: adapter-container-demo
+  labels:
+    env: prod 
+spec:
+  ports: 
+  - port: 80 
+    protocol: TCP
+    targetPort: 80
+  selector:
+    env: prod 
+  type: NodePort
+

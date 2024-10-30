@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: init-container-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: init-container-deployment
+  template:
+    metadata:
+      labels:
+        app: init-container-deployment
+    spec:
+      initContainers:
+      - name: wait-for-service
+        image: busybox
+        command: ['sh', '-c', "until nslookup myservice.default.svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
+      - name: perform-task
+        image: busybox
+        command: ['sh', '-c', 'echo "Init-container tasks completed" > /tasks/status.txt']
+        volumeMounts:
+        - name: tasks-volume
+          mountPath: /tasks 
+      containers:
+      - image: busybox
+        name: busybox
+        command: ['sh', '-c', 'while true; do echo "Main container running"; sleep10; done']
+        volumeMounts:
+        - name: tasks-volume 
+          mountPath: /tasks 
+      volumes: 
+      - name: tasks-volume 
+        emptyDir: {}
+        
