@@ -11,6 +11,9 @@
 - kops delete -f cluster.yml  --yes
 
 
+# Pod
+
+- Create a pod - kubectl run pod --image nginx:latest
 # Deployment
 
 - kubectl create deployment testpod1 --image kiran2361993/kubegame:v2 --replicas 6 --dry-run -o yaml
@@ -21,3 +24,7 @@
 
 - kubectl expose deployemnt init-container-deployment --name myservice --port 80
 - kubectl delete service <service-name>
+
+# Change ns
+
+- Switch to diff ns - kubectl config set-context --current --namespace=development

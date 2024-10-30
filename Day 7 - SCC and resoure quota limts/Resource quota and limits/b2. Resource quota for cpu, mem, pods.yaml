@@ -1,0 +1,28 @@
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: development
+  labels:
+    name: development
+
+# this will create a ns
+
+---
+
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: object-counts
+  namespace: development
+spec: 
+  hard: 
+    requests.cpu: "1000m"
+    limits.cpu: "2000m"
+    requests.memory: 1Gi
+    limits.memory: 2Gi
+    pods: "10"
+    replicationcontrollers: "20" 
+    resourcequotas: "10" 
+    services: "5"
+    
