@@ -11,9 +11,13 @@ This will result in error as our management server does not have docker installe
 
 # Install docker
 
-sudo apt update
-sudo apt install docker.io -y
-docker login
+`sudo apt update`
+`sudo apt install docker.io -y`
+
+`sudo usermod -aG docker ubuntu`
+
+Log out from VM, then do docker login again to reflect updated groups. We have added ubuntu to docker group now
+`docker login`
 
 
 ! Note - grant acess to the user they want to use to interact with docker and run docker commands.
