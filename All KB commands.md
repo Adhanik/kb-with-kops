@@ -17,12 +17,15 @@
 # Deployment
 
 - kubectl create deployment testpod1 --image kiran2361993/kubegame:v2 --replicas 6 --dry-run -o yaml
+- kubectl create deployment newnginx --image=nginx:latest --replicas=3 --dry-run=client -o yaml
+
 - kubectl delete deployment.apps <deployment-name>
 
 
 # Service
 
 - kubectl expose deployemnt init-container-deployment --name myservice --port 80
+- kubectl expose deployment newnginx --port=80 --target-port=9999 --type=NodePort
 - kubectl delete service <service-name>
 
 # Change ns
