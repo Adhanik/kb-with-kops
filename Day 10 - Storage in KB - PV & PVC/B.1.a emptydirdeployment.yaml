@@ -1,0 +1,36 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx-deployment
+  name: nginx-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: kiran2361993/troubleshootingtools:v1
+        name: troubleshootingtools
+        volumeMounts:
+          - name: myemptydir
+            mountPath: /etc/myemptydir
+      - image: nginx:latest
+        name: nginx 
+        ports:
+          - containerPort: 80 
+        volumeMounts:
+          - name: myemptydir
+            mountPath: /tmp/myemptydir 
+      volumes: 
+        - name: myemptydir
+          emptyDir: {}
+
+
+
