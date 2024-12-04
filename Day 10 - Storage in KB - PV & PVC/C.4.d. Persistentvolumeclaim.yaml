@@ -1,0 +1,13 @@
+
+apiVersion: vi 
+kind: PersistentVolumeClaim 
+metadata:
+  name: task-pv-claim1 
+spec: 
+  storageClassName: gp2 
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi 
+
