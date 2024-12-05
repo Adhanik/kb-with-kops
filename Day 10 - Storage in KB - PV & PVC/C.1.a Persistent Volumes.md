@@ -1,7 +1,7 @@
 
 ## Persistent Volume
 
-A PV is a piece of storage in cluster that has been provisioned by and admin or dynamically provisioned using Storage Classes.
+A PV is a piece of storage in cluster that has been provisioned by an admin or dynamically provisioned using Storage Classes.
 
 We will create 4 PV, attached with EBS volumes, and then use them for PVC requests.
 
