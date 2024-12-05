@@ -33,3 +33,22 @@ ubuntu@ip-172-31-25-119:~$
 
 ```
 We will do the bound each of the PV we have created.
+
+```
+persistentvolumeclaim/task-pv-claim2 created
+persistentvolumeclaim/task-pv-claim3 created
+persistentvolumeclaim/task-pv-claim4 created
+persistentvolumeclaim/task-pv-claim5 created
+```
+
+Now all PV are bounded to respective PVC 
+
+```
+kubectl get pv
+NAME      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                    STORAGECLASS   REASON   AGE
+aws-pv1   2Gi        RWO            Delete           Bound    default/task-pv-claim1   gp2                     28m
+aws-pv2   4Gi        RWO            Delete           Bound    default/task-pv-claim2   gp2                     28m
+aws-pv3   6Gi        RWO            Delete           Bound    default/task-pv-claim3   gp2                     28m
+aws-pv4   8Gi        RWO            Delete           Bound    default/task-pv-claim4   gp2                     28m
+aws-pv5   10Gi       RWO            Delete           Bound    default/task-pv-claim5   gp2                     28m
+```
