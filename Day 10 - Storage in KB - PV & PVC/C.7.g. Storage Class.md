@@ -15,6 +15,8 @@ kops-ssd-1-17             kubernetes.io/aws-ebs   Delete          WaitForFirstCo
 
 So now if we claim for 30 gb
 
+```
+
 apiVersion: v1
 kind: PersistentVolumeClaim 
 metadata:
@@ -26,6 +28,7 @@ spec:
   resources:
     requests:
       storage: 30Gi
+```
 
 We can see it will be bounded and not in pending state anymore, as before where we have deleted the default gp2 storage class, and the claim was not being assigned.
 
