@@ -1,0 +1,24 @@
+--- 
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-trrafic-in-pods-in-same-ns
+  namespace: prod 
+spec:
+  podSelector:
+    matchLabels:
+      ns: prod 
+  policyTypes:
+  - Ingress 
+  - Egress 
+  ingress:
+  - from: 
+    - podSelector:
+        matchLabels:
+          ns: prod
+  egress:
+  - to: 
+    - podSelector:
+        matchLabels:
+          ns: prod 
+

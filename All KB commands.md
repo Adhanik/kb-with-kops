@@ -16,7 +16,6 @@
 - Create a pod - kubectl run pod --image nginx:latest
 
 kubectl delete pods --all - Delete all pods
- 
 # Deployment
 
 - kubectl create deployment testpod1 --image kiran2361993/kubegame:v2 --replicas 6 --dry-run -o yaml
