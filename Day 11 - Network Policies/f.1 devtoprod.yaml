@@ -1,0 +1,45 @@
+
+# Allow ingress traffic from dev to prod applied at prod ns
+
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: devpod-talks-to-prodpod
+  namespace: prod 
+spec: 
+  podSelector:
+    matchLabels:
+      ns: prod
+  policyTypes:
+  - Ingress 
+  ingress:
+  - from:  ## we have mentioned ingress traffic allowed from dev ns with matchlabes and ns
+    - namespaceSelector:
+        matchLabels:
+          nsp: dev
+    - podSelector:
+        matchLabels:
+          ns: dev
+
+# From dev, we want to allow egress traffic that is coming to prod, so we will allow Egress
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: devpod-talks-to-prodpod
+  namespace: dev 
+spec: 
+  podSelector:
+    matchLabels:
+      ns: dev
+  policyTypes:
+  - Egress  ## we have allowed egress traffic to prod from dev ns
+  egress:
+  - to: 
+    - namespaceSelector:
+        matchLabels:
+          nsp: prod
+    - podSelector:
+        matchLabels:
+          ns: prod
+
