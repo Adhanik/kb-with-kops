@@ -1,0 +1,36 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: deny-all-traffic-to-and-from-prod
+  namespace: prod 
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress 
+--- 
+
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: deny-all-traffic-to-and-from-dev
+  namespace: dev
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress 
+  - Egress 
+
+--- 
+
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: deny-all-traffic-to-and-from-qa
+  namespace: qa 
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress 
+  - Egress 
