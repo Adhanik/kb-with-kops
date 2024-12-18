@@ -42,6 +42,7 @@ kops create cluster --name=cloudadhanik.xyz \
 
 `kops validate cluster --wait 10m`
 
+Delete it later - `kops delete -f cluster.yml  --yes`
 
 - Once you create cluster using the above command, control plane and worker nodes will not have any public IP assigned to them.
 
