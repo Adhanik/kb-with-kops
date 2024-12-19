@@ -37,12 +37,18 @@ kops create cluster --name=cloudadhanik.xyz \
 --control-plane-volume-size 10 --node-volume-size 10 \
 --topology private --networking calico \
 --ssh-public-key ~/.ssh/id_ed25519.pub \
---dns-zone=cloudadhanik.xyz --yes
+--dns-zone=cloudadhanik.xyz --dry-run --output yaml 
 ```
 
-`kops validate cluster --wait 10m`
+vi cluster.yaml
+- `kops create -f cluster.yaml`
+- `kops update cluster --name cloudadhanik.xyz --yes --admin`
+- `kops validate cluster --wait 10m`
 
 Delete it later - `kops delete -f cluster.yml  --yes`
+OR
+Use this command for above cluster - `kops delete cluster --name=cloudadhanik.xyz --state=s3://cloudadhanik.xyz --yes`
+
 
 - Once you create cluster using the above command, control plane and worker nodes will not have any public IP assigned to them.
 
