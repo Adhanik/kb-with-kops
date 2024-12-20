@@ -4,7 +4,7 @@ kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
   name: allow-traffic-from-prod-to-qa-on-tcp8888
-  ns: qa 
+  namespace: qa 
 spec:
   podSelector:
     matchLabels:
@@ -28,7 +28,7 @@ kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:   
   name: allow-traffic-from-prod-to-qa-on-tcp8888
-  ns: prod 
+  namespace: prod 
 spec: 
   podSelector:
     matchLabels:

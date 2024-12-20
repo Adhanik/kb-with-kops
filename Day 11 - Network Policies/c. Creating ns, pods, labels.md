@@ -3,18 +3,18 @@
 
 We will be creating 3 ns - dev, qa and prod.
 
-- `kubectlbectl create ns dev`
-- `kubectlbectl create ns prod`
-- `kubectlbectl create ns qa`
+- `kubectl create ns dev`
+- `kubectl create ns prod`
+- `kubectl create ns qa`
 
 ## Add labels to ns
 
 
 Next we will be adding lables to our 3 ns
 
-- `kubectlbectl label ns prod nsp=prod`
-- `kubectlbectl label ns dev nsp=dev`
-- `kubectlbectl label ns qa nsp=qa`
+- `kubectl label ns prod nsp=prod`
+- `kubectl label ns dev nsp=dev`
+- `kubectl label ns qa nsp=qa`
 
  What is this nsp argument ??
 
@@ -42,7 +42,7 @@ kubectl label ns qa nsp=qa
 Next, if you run `kubectl get ns --show-labels`
 
 ```
- kubectlbectl get ns --show-labels
+ kubectl get ns --show-labels
 NAME              STATUS   AGE   LABELS
 
 dev               Active   57s   kubectlbernetes.io/metadata.name=dev,nsp=dev
@@ -54,8 +54,8 @@ qa                Active   49s   kubectlbernetes.io/metadata.name=qa,nsp=qa
 
 ### prod
 
-kubectlbectl run prod1 --image=kiran2361993/troubleshootingtools:v1 -n prod -l ns=prod
-kubectlbectl run prod2 --image=kiran2361993/troubleshootingtools:v1 -n prod -l ns=prod
+kubectl run prod1 --image=kiran2361993/troubleshootingtools:v1 -n prod -l ns=prod
+kubectl run prod2 --image=kiran2361993/troubleshootingtools:v1 -n prod -l ns=prod
 
  Does -l stand for label here?
 
@@ -106,18 +106,18 @@ kubectl run prod2 --image=kiran2361993/troubleshootingtools:v1 -n prod -l ns=pro
 
 ### dev
 
-kubectlbectl run dev1 --image=kiran2361993/troubleshootingtools:v1 -n dev -l ns=dev
-kubectlbectl run dev2 --image=kiran2361993/troubleshootingtools:v1 -n dev -l ns=dev
+kubectl run dev1 --image=kiran2361993/troubleshootingtools:v1 -n dev -l ns=dev
+kubectl run dev2 --image=kiran2361993/troubleshootingtools:v1 -n dev -l ns=dev
 
 ### QA
 
-kubectlbectl run qa1 --image=kiran2361993/troubleshootingtools:v1 -n qa -l ns=qa
-kubectlbectl run qa2 --image=kiran2361993/troubleshootingtools:v1 -n qa -l ns=qa
+kubectl run qa1 --image=kiran2361993/troubleshootingtools:v1 -n qa -l ns=qa
+kubectl run qa2 --image=kiran2361993/troubleshootingtools:v1 -n qa -l ns=qa
 
 ## Check all pods 
 
 ```
-kubectlbectl get pods -o wide -n prod && kubectlbectl get pods -o wide -n dev && kubectlbectl get pods -o wide -n qa
+kubectl get pods -o wide -n prod && kubectl get pods -o wide -n dev && kubectl get pods -o wide -n qa
 NAME    READY   STATUS    RESTARTS   AGE     IP                NODE                  NOMINATED NODE   READINESS GATES
 prod1   1/1     Running   0          2m28s   100.115.162.194   i-0f3b21bd0da060378   <none>           <none>
 prod2   1/1     Running   0          2m28s   100.115.162.195   i-0f3b21bd0da060378   <none>           <none>
@@ -133,10 +133,10 @@ ubuntu@ip-172-31-20-104:~$
 
 Without header
 
-kubectlbectl get pods -o wide -n prod --no-headers && kubectlbectl get pods -o wide -n dev --no-headers && kubectlbectl get pods -o wide -n qa --no-headers
+kubectl get pods -o wide -n prod --no-headers && kubectl get pods -o wide -n dev --no-headers && kubectl get pods -o wide -n qa --no-headers
 
 ```
-kubectlbectl get pods -o wide -n prod --no-headers && kubectlbectl get pods -o wide -n dev --no-headers && kubectlbectl get pods -o wide -n qa --no-headers
+kubectl get pods -o wide -n prod --no-headers && kubectl get pods -o wide -n dev --no-headers && kubectl get pods -o wide -n qa --no-headers
 prod1   1/1   Running   0     8m31s   100.115.162.194   i-0f3b21bd0da060378   <none>   <none>
 prod2   1/1   Running   0     8m31s   100.115.162.195   i-0f3b21bd0da060378   <none>   <none>
 dev1   1/1   Running   0     8m16s   100.110.204.67   i-0c45f29f172d12bec   <none>   <none>
@@ -147,7 +147,7 @@ qa2   1/1   Running   0     7m48s   100.110.204.68    i-0c45f29f172d12bec   <non
 ```
 ### Creat alias for big command
 
-alias allpods='kubectlbectl get pods -o wide -n prod --no-headers && kubectlbectl get pods -o wide -n dev --no-headers && kubectlbectl get pods -o wide -n qa --no-headers'
+alias allpods='kubectl get pods -o wide -n prod --no-headers && kubectl get pods -o wide -n dev --no-headers && kubectl get pods -o wide -n qa --no-headers'
 
 `source .bashrc`
 env
