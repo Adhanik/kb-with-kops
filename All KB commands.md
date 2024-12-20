@@ -14,8 +14,10 @@
 # Pod
 
 - Create a pod - kubectl run pod --image nginx:latest
+- kubectl run prod1 --image=kiran2361993/troubleshootingtools:v1 -n prod -l ns=prod
+- kubectl exec -it prod -- bash
+- kubectl delete pods --all - Delete all pods
 
-kubectl delete pods --all - Delete all pods
 # Deployment
 
 - kubectl create deployment testpod1 --image kiran2361993/kubegame:v2 --replicas 6 --dry-run -o yaml
@@ -33,3 +35,14 @@ kubectl delete pods --all - Delete all pods
 # Change ns
 
 - Switch to diff ns - kubectl config set-context --current --namespace=development
+
+
+# Create ns and label
+
+- kubectl create ns prod
+- kubectl label ns qa nsp=qa
+- kubectl get ns --show-labels
+
+# alias
+
+alias allpods='kubectl get pods -o wide -n prod --no-headers && kubectl get pods -o wide -n dev --no-headers && kubectl get pods -o wide -n qa --no-headers'
