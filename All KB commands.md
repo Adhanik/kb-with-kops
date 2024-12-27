@@ -24,8 +24,10 @@
 - kubectl create deployment newnginx --image=nginx:latest --replicas=3 --dry-run=client -o yaml
 
 - kubectl delete deployment.apps <deployment-name>
+- kubectl delete deployment.apps --all
 
-
+- kubectl scale deployment newnginx --replicas 10
+- 
 # Service
 
 - kubectl expose deployemnt init-container-deployment --name myservice --port 80

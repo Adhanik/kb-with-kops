@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myapp01
+  name: myapp01
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp01
+  template:
+    metadata:
+      labels:
+        app: myapp01
+    spec:
+      containers:
+      - image: kiran2361993/kubegame:v2
+        name: kubegame
+      nodeSelector:
+        high-perf-cpu: "yes"
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myapp02
+  name: myapp02
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp02
+  template:
+    metadata:
+      labels:
+        app: myapp02
+    spec:
+      containers:
+      - image: nginx
+        name: kubegame
+      nodeSelector:
+        low-perf-cpu: "yes"
+        

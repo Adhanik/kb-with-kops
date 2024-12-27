@@ -1,0 +1,22 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myapp01
+  name: myapp01
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp01
+  template:
+    metadata:
+      labels:
+        app: myapp01
+    spec:
+      containers:
+      - image: kiran2361993/kubegame:v2
+        name: kubegame
+      nodeSelector:
+        kubernetes.io/hostname: i-02323f017dd4c7124
