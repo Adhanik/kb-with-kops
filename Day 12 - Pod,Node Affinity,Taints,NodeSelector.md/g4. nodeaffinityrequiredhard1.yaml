@@ -1,0 +1,32 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: required-hard
+  name: required-hard
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: required-hard
+  template:
+    metadata:
+      labels:
+        app: required-hard
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: env 
+                operator: In
+                values:
+                - one 
+                - two
+                - three
+
