@@ -48,3 +48,19 @@
 # alias
 
 alias allpods='kubectl get pods -o wide -n prod --no-headers && kubectl get pods -o wide -n dev --no-headers && kubectl get pods -o wide -n qa --no-headers'
+
+## Taint the nodes
+
+Next we will taint the nodes 
+
+`kubectl taint nodes i-0ae49c553dd44dbe6 high-cpu=yes:NoSchedule`
+`kubectl taint nodes i-0e8a5897b99e4741d mid-cpu=yes:NoSchedule`
+`kubectl taint nodes i-0f302835d89b26b7d low-cpu=yes:NoSchedule`
+
+
+## Untaint the nodes
+
+
+`kubectl taint nodes i-0ae49c553dd44dbe6 high-cpu-`
+`kubectl taint nodes i-0e8a5897b99e4741d mid-cpu-`
+`kubectl taint nodes i-0f302835d89b26b7d low-cpu-`
