@@ -48,3 +48,74 @@ Yes, if you don’t explicitly define liveness or readiness probes, the kubelet 
 In summary, without defined probes, the kubelet depends on the process’s exit status and restartPolicy. However, this setup doesn’t allow the kubelet to detect “soft” failures (like a process running but unresponsive), which liveness probes would catch.
 
 We will define both health probes in our common manifest file.
+
+## Process’s exit status
+
+In Linux-based systems, process exit statuses are integers returned by a process to indicate its completion state. These statuses are essential for tools like the **kubelet** to determine what actions to take (e.g., restarting a Pod based on `restartPolicy`).
+
+### **Common Process Exit Status Codes**
+
+| **Exit Code** | **Meaning**                                                                                                                                  | **Details**                                                                                  |
+|---------------|----------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| **0**         | **Success**                                                                                                                                 | Indicates that the process executed successfully without errors.                            |
+| **1**         | **General Error**                                                                                                                           | A general error occurred, but it is not specific to a particular issue.                     |
+| **2**         | **Misuse of Command**                                                                                                                       | The command was used incorrectly (e.g., invalid options).                                   |
+| **126**       | **Command Cannot Execute**                                                                                                                  | Indicates that the command is found but cannot execute (e.g., insufficient permissions).    |
+| **127**       | **Command Not Found**                                                                                                                       | The command is not available on the system.                                                 |
+| **128**       | **Invalid Exit Argument**                                                                                                                   | An invalid argument was passed to the exit command.                                         |
+| **128 + N**   | **Fatal Error Signal (N)**                                                                                                                  | Indicates a process was terminated by signal `N` (e.g., 130 for Ctrl+C, 137 for SIGKILL).   |
+| **130**       | **Script Terminated by Ctrl+C**                                                                                                             | A signal interrupt (`SIGINT`) from the terminal.                                            |
+| **137**       | **Killed by SIGKILL**                                                                                                                       | Indicates the process was forcibly killed (e.g., out-of-memory killer).                     |
+| **139**       | **Segmentation Fault**                                                                                                                      | The process accessed invalid memory, leading to a crash (`SIGSEGV`).                       |
+| **143**       | **Killed by SIGTERM**                                                                                                                       | Indicates graceful termination by `SIGTERM` (commonly sent to terminate Kubernetes Pods).   |
+
+---
+
+### **How Exit Codes Relate to Kubernetes Kubelet**
+
+1. **Exit Code Monitoring by Kubelet**:
+   - Kubernetes uses exit codes to understand why a container process exited. 
+   - Based on the container's `exit status` and the Pod's `restartPolicy` (`Always`, `OnFailure`, or `Never`), the kubelet decides whether to restart the container.
+
+2. **Liveness Probes for Unresponsive Processes**:
+   - While exit statuses handle cases where the process stops, they don't detect "soft failures," where the process is running but not functioning properly (e.g., stuck in an infinite loop).
+   - **Liveness probes** (HTTP, TCP, or command-based checks) are designed to catch such scenarios and restart the container proactively.
+
+---
+
+### **Practical Example in Kubernetes**
+
+#### Pod Spec Using `restartPolicy` and Liveness Probe:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example-pod
+spec:
+  containers:
+  - name: example-app
+    image: myapp:latest
+    args: ["--run"]
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8080
+      initialDelaySeconds: 3
+      periodSeconds: 5
+  restartPolicy: OnFailure
+```
+
+- **Process Exit Code Behavior**: If the container exits with a non-zero status, the kubelet will restart it based on the `OnFailure` policy.
+- **Liveness Probe**: Ensures the process is healthy, even if it is still running (e.g., a stuck or unresponsive process will trigger a restart).
+
+---
+
+### **Debugging and Logs**
+
+To debug common exit statuses in a Kubernetes environment:
+```bash
+kubectl logs <pod-name> --previous
+kubectl describe pod <pod-name>
+```
+
+These commands help identify the exit code, error logs, and probe failures. Let me know if you'd like to explore specific scenarios!
