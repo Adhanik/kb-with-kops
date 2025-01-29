@@ -5,6 +5,8 @@ How a svc in KB is assigned a endpoint? suppose i have created a svc using kubec
 
 If i delete the above pod alpha1, the svc is not deleted, and if i do kubectl describe svc, then endpoint shows as <none>. and if i create alpha1 again using below 
 
+```
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -17,7 +19,7 @@ spec:
     containers:
     -  image: nginx:latest
         name: alpha1
-
+```
 Then endpoint is again assigned after pod is deployed successfully. how does this svc know to connect to this pod only. if i do kubectl get pods -o wide , i see the pod ip, in endpoint, i see the same ip:port 
 
 # Sol
