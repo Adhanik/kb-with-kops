@@ -64,3 +64,17 @@ Next we will taint the nodes
 `kubectl taint nodes i-0ae49c553dd44dbe6 high-cpu-`
 `kubectl taint nodes i-0e8a5897b99e4741d mid-cpu-`
 `kubectl taint nodes i-0f302835d89b26b7d low-cpu-`
+
+
+
+
+### PRACTISE ###
+
+kubectl explain pod ## gives all parameter necessary to write a pod
+kubectl create ns aplha
+kubectl run pod1 --image=nginx:latest -n alpha --dry-run -o yaml 
+kubectl get pods -o wide 
+kubectl expose pod1 --port=8000 --target-port=80 --type=NodePort -n <ns>
+
+# Kubernetes uses labels and selectors to associate a Service with the right Pods. if you create a pod with same label as svc, that pod IP is automatically assigned the service as endpoint, enabling communication to that pod.
+
