@@ -5,6 +5,7 @@
 A Readiness Probe determines if a container is ready to handle requests. If the probe fails, the container is temporarily removed from service.
 
 - Example:
+```
 
 apiVersion: v1
 kind: Pod
@@ -21,6 +22,7 @@ spec:
       initialDelaySeconds: 5
       periodSeconds: 10
 
+```
 
 In this example:
 
