@@ -23,6 +23,6 @@ spec:
 ```
 In this example:
 
-httpGet: Similar to the Readiness Probe, but used to determine if the container should be restarted.
-initialDelaySeconds: The probe starts checking 3 seconds after the container starts.
-periodSeconds: The probe checks the endpoint every 5 seconds.
+- httpGet: Similar to the Readiness Probe, but used to determine if the container should be restarted.
+- initialDelaySeconds: The probe starts checking 3 seconds after the container starts.
+- periodSeconds: The probe checks the endpoint every 5 seconds.
