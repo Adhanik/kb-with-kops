@@ -41,9 +41,9 @@ Yes, if you don’t explicitly define liveness or readiness probes, the kubelet 
 
 • The kubelet respects the pod’s restartPolicy: 
 
-• Always (default for most Pods): Kubelet will automatically restart the container if it fails. 
-• OnFailure: The kubelet will restart the container only if it exits with a non-zero exit code. 
-• Never: The kubelet won’t restart the container regardless of its exit status. 
+- Always (default for most Pods): Kubelet will automatically restart the container if it fails. 
+- OnFailure: The kubelet will restart the container only if it exits with a non-zero exit code. 
+- Never: The kubelet won’t restart the container regardless of its exit status. 
 
 In summary, without defined probes, the kubelet depends on the process’s exit status and restartPolicy. However, this setup doesn’t allow the kubelet to detect “soft” failures (like a process running but unresponsive), which liveness probes would catch.
 
