@@ -1,12 +1,14 @@
 
 why we have 0/1?
 
+```
+
 kubectl get all -n ingress-nginx
 NAME                                            READY   STATUS      RESTARTS   AGE
 pod/ingress-nginx-admission-create-85pww        0/1     Completed   0          25m
 pod/ingress-nginx-admission-patch-d9nrp         0/1     Completed   1          25m
 pod/ingress-nginx-controller-77667b9d9b-vh22j   1/1     Running     0          25m
-
+```
 
 ## sol
 
