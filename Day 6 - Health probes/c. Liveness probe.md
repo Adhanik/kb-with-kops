@@ -3,6 +3,7 @@
 A Liveness Probe ensures that your container is running properly. If the probe fails, Kubernetes will restart the container.
 
 - Example:
+```
 
 apiVersion: v1
 kind: Pod
@@ -19,6 +20,7 @@ spec:
       initialDelaySeconds: 3
       periodSeconds: 5
 
+```
 In this example:
 
 httpGet: Similar to the Readiness Probe, but used to determine if the container should be restarted.
