@@ -14,15 +14,15 @@ resource "helm_release" "fluentd" {
     value = "v1.14.6"  # Use the desired Fluentd version
   }
 
-  set {
-    name  = "config.output"
-    value = <<EOF
+set {
+  name  = "config.output"
+  value = <<EOF
 <match **>
-  @type elasticsearch  # Change this to your desired output (e.g., Loki, S3)
-  host elasticsearch  # Replace with your logging backend
-  port 9200
-  logstash_format true
+  @type loki
+  url http://loki:3100
+  flush_interval 10s
+  buffer_chunk_limit 1m
 </match>
 EOF
-  }
+}
 }
