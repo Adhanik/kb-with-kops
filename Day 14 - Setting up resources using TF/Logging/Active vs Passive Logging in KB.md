@@ -5,17 +5,18 @@ There are two logging strategies:  Passive and active
 
 
 - The application logs to stdout and stderr
-
 - Apps that use passive logging are unaware of the logging infra and log  messages to standard outputs
-
+- Kubernetes captures these logs and makes them available through kubectl logs <pod-name>.
+- A sidecar or DaemonSet-based logging agent (like Fluentd, Filebeat, or Promtail) collects and forwards logs to a central system.
 
 ### Active logging
 
 In active logging the app makes network connections to intermediate aggregators, sends data to third party logging services, or writes directly to a database or index.
 
-Active logging is considered an antipattern, and it should be avoided.
-
-
+- Active logging is considered an antipattern, and it should be avoided.
+- The application itself sends logs directly to an external system (e.g., Elasticsearch, Splunk, or a database).
+- Requires additional networking overhead and can fail if the external system is down.
+- Harder to scale and debug.
 
 ## Explaination
 

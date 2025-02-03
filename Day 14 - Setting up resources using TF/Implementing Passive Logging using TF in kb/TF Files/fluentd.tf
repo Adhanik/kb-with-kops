@@ -13,7 +13,7 @@ resource "helm_release" "fluentd" {
     name  = "image.tag"
     value = "v1.14.6"  # Use the desired Fluentd version
   }
-
+## updated the Fluentd configuration to forward logs to Loki:
 set {
   name  = "config.output"
   value = <<EOF
